@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../components/Header';
+import searchAlbumsAPIs from '../services/searchAlbumsAPI';
+import ResultList from './ResultList';
 
 class Search extends Component {
   constructor() {
@@ -8,6 +10,9 @@ class Search extends Component {
     this.state = {
       inputSearch: '',
       isDisabled: true,
+      searcheds: [],
+      buttonClicked: false,
+      searchedName: '',
     };
   }
 
@@ -25,8 +30,20 @@ class Search extends Component {
     this.enableButton(value);
   };
 
+  handleButtonClick = async () => {
+    const { inputSearch } = this.state;
+    this.setState({
+      searchedName: inputSearch,
+      inputSearch: '',
+      buttonClicked: true,
+    });
+    const result = await searchAlbumsAPIs(inputSearch);
+    this.setState({ searcheds: result });
+  };
+
   render() {
-    const { inputSearch, isDisabled } = this.state;
+    const { inputSearch, isDisabled, searcheds,
+      buttonClicked, searchedName } = this.state;
     return (
       <div data-testid="page-search">
         <Header />
@@ -47,12 +64,30 @@ class Search extends Component {
               id="pesquisar"
               data-testid="search-artist-button"
               disabled={ isDisabled }
+              onClick={ this.handleButtonClick }
             >
               Pesquisar
 
             </button>
           </label>
         </form>
+        { (buttonClicked && searcheds.length === 0) && <p>Nenhum álbum foi encontrado</p>}
+        { (buttonClicked && searcheds.length > 0) && (
+          <>
+            <p>
+              Resultado de álbuns de:
+              {' '}
+              {searchedName}
+
+            </p>
+            <ul>
+              { searcheds.map((searched) => (<ResultList
+                { ...searched }
+                key={ searched.artistId }
+              />)) }
+            </ul>
+          </>
+        )}
       </div>
     );
   }
