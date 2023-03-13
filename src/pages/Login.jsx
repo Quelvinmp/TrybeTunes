@@ -51,15 +51,18 @@ class Login extends Component {
               onChange={ this.handleInputChange }
             />
           </label>
-          <button
-            type="button"
-            data-testid="login-submit-button"
-            disabled={ isDisabled }
-            onClick={ this.onClickButton }
-          >
-            Entrar
+          <label htmlFor="submit">
+            <button
+              id="submit"
+              type="button"
+              data-testid="login-submit-button"
+              disabled={ isDisabled }
+              onClick={ this.onClickButton }
+            >
+              Entrar
 
-          </button>
+            </button>
+          </label>
           { buttonClicked && <Loading />}
           { result === 'OK' && <Redirect to="/search" />}
         </form>
