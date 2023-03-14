@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { addSong } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
 
 class MusicCard extends Component {
@@ -10,6 +10,7 @@ class MusicCard extends Component {
       loading: false,
       favorited: false,
       check: false,
+      favorite: [],
     };
   }
 
@@ -19,6 +20,31 @@ class MusicCard extends Component {
 
   //   }
   // }
+
+  componentDidMount() {
+    if (localStorage.getItem('favorite_songs')) {
+      this.setState({
+        loading: true,
+        favorited: true,
+      });
+      // const { favorite } = this.state;
+      this.storageVerify();
+      this.setState({
+        loading: false,
+        favorited: false,
+        // check: favorite.some(({ trackId: id }) => id === trackId),
+      });
+    }
+  }
+
+  storageVerify = async () => {
+    const { trackId } = this.props.infos;
+    const { favorite } = this.state;
+    const results = await getFavoriteSongs();
+    this.setState({
+      favorite: results,
+    });
+  };
 
   handleCheck = async ({ target: { checked } }) => {
     this.setState({
@@ -39,7 +65,7 @@ class MusicCard extends Component {
   render() {
     const { trackName, previewUrl, trackId } = this.props.infos;
     // const { handleCheck, check } = this.props;
-    const { loading, favorited, check } = this.state;
+    const { loading, favorited, check, favorite } = this.state;
     return (
       <>
         { (loading && favorited) && <Loading /> }
@@ -67,7 +93,7 @@ class MusicCard extends Component {
               id={ trackId }
               // onChange={ handleCheck }
               onChange={ this.handleCheck }
-              checked={ check }
+              checked={ favorite.some(({ trackId: id }) => id === trackId) || check }
             />
           </label>
         </li>
