@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
 
 class MusicCard extends Component {
@@ -43,6 +43,7 @@ class MusicCard extends Component {
     const results = await getFavoriteSongs();
     this.setState({
       favorite: results,
+      check: results.some(({ trackId: id }) => id === trackId),
     });
   };
 
@@ -55,6 +56,8 @@ class MusicCard extends Component {
     const { infos } = this.props;
     if (checked) {
       await addSong(infos);
+    } else {
+      await removeSong(infos);
     }
     this.setState({
       loading: false,
@@ -93,7 +96,7 @@ class MusicCard extends Component {
               id={ trackId }
               // onChange={ handleCheck }
               onChange={ this.handleCheck }
-              checked={ favorite.some(({ trackId: id }) => id === trackId) || check }
+              checked={ check }
             />
           </label>
         </li>
