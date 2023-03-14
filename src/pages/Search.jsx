@@ -83,7 +83,7 @@ class Search extends Component {
             <ul>
               { searcheds.map((searched) => (<ResultList
                 { ...searched }
-                key={ searched.artistId }
+                key={ searched.collectionId }
               />)) }
             </ul>
           </>

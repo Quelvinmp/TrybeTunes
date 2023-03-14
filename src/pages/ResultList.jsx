@@ -12,7 +12,10 @@ class ResultList extends Component {
         <Link
           to={ `/album/${collectionId}` }
           data-testid={ `link-to-album-${collectionId}` }
-        />
+        >
+          Clique Aqui
+
+        </Link>
       </li>
     );
   }
