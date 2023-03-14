@@ -14,6 +14,11 @@ class Album extends Component {
     };
   }
 
+  componentDidMount() {
+    const { id } = this.props.match.params;
+    this.handleMusicsAPI(id);
+  }
+
   handleMusicsAPI = async (id) => {
     const result = await getMusics(id);
     this.setState({
@@ -24,7 +29,6 @@ class Album extends Component {
 
   render() {
     const { params: { id } } = this.props.match;
-    this.handleMusicsAPI(id);
     const { albunsInfo, albuns } = this.state;
     return (
       <div data-testid="page-album">
@@ -33,9 +37,11 @@ class Album extends Component {
         <h2 data-testid="album-name">{albunsInfo.collectionName}</h2>
         <ul>
           { albuns.slice(1)
-            .map((album) => <MusicCard infos={ album } key={ album.trackId } />) }
-          {/* { albuns.filter(({ wrapperType }) => wrapperType !== 'collection')
-            .map((album) => <MusicCard infos={ album } key={ album.trackId } />) } */}
+            .map((album) => (
+              <MusicCard
+                infos={ album }
+                key={ album.trackId }
+              />)) }
         </ul>
       </div>
     );
