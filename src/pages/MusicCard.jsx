@@ -48,6 +48,8 @@ class MusicCard extends Component {
   };
 
   handleCheck = async ({ target: { checked } }) => {
+    const { checkVerify } = this.props;
+    const { favorited, check } = this.state;
     this.setState({
       loading: true,
       favorited: true,
@@ -58,6 +60,7 @@ class MusicCard extends Component {
       await addSong(infos);
     } else {
       await removeSong(infos);
+      checkVerify(JSON.parse(localStorage.getItem('favorite_songs')));
     }
     this.setState({
       loading: false,
@@ -67,7 +70,6 @@ class MusicCard extends Component {
 
   render() {
     const { trackName, previewUrl, trackId } = this.props.infos;
-    // const { handleCheck, check } = this.props;
     const { loading, favorited, check, favorite } = this.state;
     return (
       <>
@@ -94,7 +96,6 @@ class MusicCard extends Component {
               type="checkbox"
               name="favorite"
               id={ trackId }
-              // onChange={ handleCheck }
               onChange={ this.handleCheck }
               checked={ check }
             />
