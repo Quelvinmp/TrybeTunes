@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
 
@@ -10,7 +11,6 @@ class MusicCard extends Component {
       loading: false,
       favorited: false,
       check: false,
-      favorite: [],
     };
   }
 
@@ -38,18 +38,15 @@ class MusicCard extends Component {
   }
 
   storageVerify = async () => {
-    const { trackId } = this.props.infos;
-    const { favorite } = this.state;
+    const { infos: { trackId } } = this.props;
     const results = await getFavoriteSongs();
     this.setState({
-      favorite: results,
       check: results.some(({ trackId: id }) => id === trackId),
     });
   };
 
   handleCheck = async ({ target: { checked } }) => {
     const { checkVerify } = this.props;
-    const { favorited, check } = this.state;
     this.setState({
       loading: true,
       favorited: true,
@@ -60,7 +57,7 @@ class MusicCard extends Component {
       await addSong(infos);
     } else {
       await removeSong(infos);
-      checkVerify(JSON.parse(localStorage.getItem('favorite_songs')));
+      if (checkVerify) checkVerify(JSON.parse(localStorage.getItem('favorite_songs')));
     }
     this.setState({
       loading: false,
@@ -69,8 +66,8 @@ class MusicCard extends Component {
   };
 
   render() {
-    const { trackName, previewUrl, trackId } = this.props.infos;
-    const { loading, favorited, check, favorite } = this.state;
+    const { infos: { trackName, previewUrl, trackId } } = this.props;
+    const { loading, favorited, check } = this.state;
     return (
       <>
         { (loading && favorited) && <Loading /> }
@@ -105,5 +102,14 @@ class MusicCard extends Component {
     );
   }
 }
+
+MusicCard.propTypes = {
+  infos: PropTypes.shape({
+    trackId: PropTypes.string.isRequired,
+    trackName: PropTypes.string.isRequired,
+    previewUrl: PropTypes.string.isRequired,
+  }).isRequired,
+  checkVerify: PropTypes.func.isRequired,
+};
 
 export default MusicCard;

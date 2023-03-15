@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
 import MusicCard from './MusicCard';
@@ -15,7 +15,7 @@ class Album extends Component {
   }
 
   componentDidMount() {
-    const { id } = this.props.match.params;
+    const { match: { params: { id } } } = this.props;
     this.handleMusicsAPI(id);
   }
 
@@ -28,7 +28,6 @@ class Album extends Component {
   };
 
   render() {
-    const { params: { id } } = this.props.match;
     const { albunsInfo, albuns } = this.state;
     return (
       <div data-testid="page-album">
@@ -48,8 +47,12 @@ class Album extends Component {
   }
 }
 
-// Album.propTypes = {
-//
-// };
+Album.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
 
 export default Album;

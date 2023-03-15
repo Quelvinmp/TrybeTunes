@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class ResultList extends Component {
@@ -20,5 +21,12 @@ class ResultList extends Component {
     );
   }
 }
+
+ResultList.propTypes = {
+  collectionName: PropTypes.string.isRequired,
+  artistName: PropTypes.string.isRequired,
+  artworkUrl100: PropTypes.string.isRequired,
+  collectionId: PropTypes.string.isRequired,
+};
 
 export default ResultList;
