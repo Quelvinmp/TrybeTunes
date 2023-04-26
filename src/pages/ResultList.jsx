@@ -6,7 +6,7 @@ class ResultList extends Component {
   render() {
     const { collectionName, artistName, artworkUrl100, collectionId } = this.props;
     return (
-      <li>
+      <li className="flex m-4">
         <img src={ artworkUrl100 } alt={ artistName } />
         <p>{collectionName}</p>
         <p>{artistName}</p>

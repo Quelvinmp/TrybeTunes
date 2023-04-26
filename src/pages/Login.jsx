@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { createUser } from '../services/userAPI';
-import Loading from './Loading';
+import Loading from '../components/Loading';
 
 class Login extends Component {
   constructor() {
@@ -39,34 +39,62 @@ class Login extends Component {
   render() {
     const { isDisabled, inputLogin, buttonClicked, result } = this.state;
     return (
-      <div data-testid="page-login">
-        <form>
-          <label htmlFor="login">
-            <input
-              type="text"
-              name="login"
-              id="login"
-              data-testid="login-name-input"
-              value={ inputLogin }
-              onChange={ this.handleInputChange }
-            />
-          </label>
-          <label htmlFor="submit">
-            <button
-              id="submit"
-              type="button"
-              data-testid="login-submit-button"
-              disabled={ isDisabled }
-              onClick={ this.onClickButton }
+      <>
+        { buttonClicked ? <Loading /> : (
+          <div
+            data-testid="page-login"
+            className="bg-OxBlue min-h-screen flex
+            items-center justify-center "
+          >
+            <form
+              className="bg-neutral-50 px-10
+              pt-10 sm:pt-14 pb-10  rounded-2xl shadow-lg
+              text-center shadow-neutral-100/30
+            "
             >
-              Entrar
+              <h1
+                className="mb-10 sm:mb-14
+                font-extrabold text-transparent text-4xl
+                sm:text-6xl bg-clip-text bg-gradient-to-tr
+                from-blue-600 to-OxBlue
+              "
+              >
+                TrybeTunes
+              </h1>
+              <label htmlFor="login">
+                <input
+                  className="w-full block border-2 border-OxBlue rounded-md p-2 mb-4
+                  focus:border-OxBlue
+                  focus:bg-neutral-100
+                  placeholder:italic placeholder:text-sm"
+                  type="text"
+                  placeholder="Qual o seu nome?"
+                  name="login"
+                  id="login"
+                  data-testid="login-name-input"
+                  value={ inputLogin }
+                  onChange={ this.handleInputChange }
+                />
+              </label>
+              <label htmlFor="submit">
+                <button
+                  className="bg-blue-600 p-3 w-full mt-4 border-OxBlue border-2
+                  rounded-lg hover:bg-blue-900 text-neutral-50"
+                  id="submit"
+                  type="button"
+                  data-testid="login-submit-button"
+                  disabled={ isDisabled }
+                  onClick={ this.onClickButton }
+                >
+                  Entrar
+                </button>
+              </label>
+            </form>
+          </div>
+        )}
+        { result === 'OK' && <Redirect to="/search" />}
 
-            </button>
-          </label>
-          { buttonClicked && <Loading />}
-          { result === 'OK' && <Redirect to="/search" />}
-        </form>
-      </div>
+      </>
     );
   }
 }

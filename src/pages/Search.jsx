@@ -45,9 +45,9 @@ class Search extends Component {
     const { inputSearch, isDisabled, searcheds,
       buttonClicked, searchedName } = this.state;
     return (
-      <div data-testid="page-search">
+      <div data-testid="page-search" className="bg-OxBlue text-neutral-50">
         <Header />
-        <form>
+        <form className="relative">
           <label htmlFor="banda-artista">
             <input
               type="text"
