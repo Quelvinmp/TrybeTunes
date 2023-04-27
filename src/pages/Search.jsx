@@ -45,21 +45,37 @@ class Search extends Component {
     const { inputSearch, isDisabled, searcheds,
       buttonClicked, searchedName } = this.state;
     return (
-      <div data-testid="page-search" className="bg-OxBlue text-neutral-50">
+      <div
+        data-testid="page-search"
+        className="bg-OxBlue text-neutral-50 min-w-full min-h-screen flex
+      flex-col"
+      >
         <Header />
-        <form className="relative">
+        <form
+          className="flex items-center justify-around mt-5
+          sm:justify-center sm:gap-10 sm:mt-14
+        "
+        >
           <label htmlFor="banda-artista">
             <input
+              className="placeholder:italic border-2 border-OxBlue rounded-md p-2
+              focus:border-OxBlue
+              focus:bg-neutral-100
+              placeholder:italic placeholder:text-sm text-black
+              "
               type="text"
               name="banda-artista"
               id="banda-artista"
               data-testid="search-artist-input"
+              placeholder="Artista / Banda / Música"
               onChange={ this.handleInputChange }
               value={ inputSearch }
             />
           </label>
           <label htmlFor="pesquisar">
             <button
+              className="bg-blue-600 p-3 border-OxBlue border-2
+              rounded-lg hover:bg-blue-900 text-neutral-50"
               type="button"
               id="pesquisar"
               data-testid="search-artist-button"
@@ -71,10 +87,16 @@ class Search extends Component {
             </button>
           </label>
         </form>
-        { (buttonClicked && searcheds.length === 0) && <p>Nenhum álbum foi encontrado</p>}
+        { (buttonClicked && searcheds.length === 0)
+        && (
+          <p
+            className="m-auto"
+          >
+            Nenhum álbum foi encontrado
+          </p>)}
         { (buttonClicked && searcheds.length > 0) && (
           <>
-            <p>
+            <p className="text-center mt-5 mb-10">
               Resultado de álbuns de:
               {' '}
               {searchedName}

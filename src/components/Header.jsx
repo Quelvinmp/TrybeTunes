@@ -26,6 +26,7 @@ class Header extends Component {
         className="sticky top-0 z-50 flex place-content-between
         bg-OxBlue
         text-neutral-50 py-4 px-3 opacity-90
+        shadow-neutral-100/5
         shadow-md"
         data-testid="header-component"
       >
