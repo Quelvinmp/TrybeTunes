@@ -102,7 +102,10 @@ class Search extends Component {
               {searchedName}
 
             </p>
-            <ul className="flex flex-col sm:grid grid-cols-4 min-w-full">
+            <ul
+              className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3
+              xl:grid-cols-4 min-w-full"
+            >
               { searcheds.map((searched) => (<ResultList
                 { ...searched }
                 key={ searched.collectionId }

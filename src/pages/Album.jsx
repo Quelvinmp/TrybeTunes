@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
-import MusicCard from './MusicCard';
+import MusicCard from '../components/MusicCard';
 
 class Album extends Component {
   constructor() {
@@ -30,11 +30,31 @@ class Album extends Component {
   render() {
     const { albunsInfo, albuns } = this.state;
     return (
-      <div data-testid="page-album">
+      <div
+        data-testid="page-album"
+        className="min-w-full min-h-screen bg-OxBlue text-neutral-50"
+      >
         <Header />
-        <h1 data-testid="artist-name">{albunsInfo.artistName}</h1>
-        <h2 data-testid="album-name">{albunsInfo.collectionName}</h2>
-        <ul>
+        <div className="flex flex-col items-center justify-center m-5">
+          <h1
+            data-testid="artist-name"
+            className=""
+          >
+            Artist:
+            {' '}
+            {albunsInfo.artistName}
+
+          </h1>
+          <h2 data-testid="album-name">
+            Collection:
+            {' '}
+            {albunsInfo.collectionName}
+          </h2>
+        </div>
+        <ul
+          className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3
+        xl:grid-cols-4"
+        >
           { albuns.slice(1)
             .map((album) => (
               <MusicCard

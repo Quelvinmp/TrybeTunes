@@ -28,17 +28,42 @@ class Profile extends Component {
       <div data-testid="page-profile">
         <Header />
         { isLoading ? <Loading /> : (
-          <>
-            <h1>{name}</h1>
-            <p>{email}</p>
-            <p>{description}</p>
+          <div
+            className="bg-OxBlue text-neutral-50 min-w-full min-h-screen flex
+          flex-col items-center "
+          >
             <img
+              className="max-h-44 rounded-full border-blue-950 border-2 mt-20 mb-4"
               src={ image }
               alt={ name }
               data-testid="profile-image"
             />
-            <Link to="/profile/edit">Editar perfil</Link>
-          </>
+            <div className="py-12 text-center">
+              <h1>
+                Name:
+                {' '}
+                {name}
+              </h1>
+              <p>
+                Email:
+                {' '}
+                {email}
+              </p>
+              <p>
+                Description:
+                {' '}
+                {description}
+              </p>
+            </div>
+            <Link
+              to="/profile/edit"
+              className="mt-4 bg-blue-600 p-3 border-OxBlue border-2
+              rounded-lg hover:bg-blue-900 text-neutral-50"
+            >
+              Editar perfil
+
+            </Link>
+          </div>
         )}
       </div>
     );

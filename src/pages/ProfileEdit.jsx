@@ -33,9 +33,11 @@ class ProfileEdit extends Component {
   enableButton = () => {
     const { pName, pEmail, pImage, pDescription } = this.state;
     if (this.validEmail(pEmail) && pName.length > 0 && pImage.length > 0
-    && pDescription.length > 0) {
+      && pDescription.length > 0) {
       this.setState({ isDisabled: false });
+      return;
     }
+    this.setState({ isDisabled: true });
   };
 
   handleChange = ({ target: { name, value } }) => {
@@ -63,14 +65,27 @@ class ProfileEdit extends Component {
       redirect } = this.state;
     // if (redirect) return (<Redirect to="/profile" />);
     return (
-      <div data-testid="page-profile-edit">
+      <div
+        data-testid="page-profile-edit"
+      >
         <Header />
-        { redirect && <Redirect to="/profile" /> }
-        { isLoading ? <Loading /> : (
-          <form>
-            <label htmlFor="pName">
+        {redirect && <Redirect to="/profile" />}
+        {isLoading ? <Loading /> : (
+          <form
+            className="bg-OxBlue text-neutral-50 w-full min-h-screen flex items-center
+      flex-col p-6"
+          >
+            <label
+              htmlFor="pName"
+              className="mt-10"
+            >
               Nome
               <input
+                className="w-full sm:w-96 block border-2 border-OxBlue rounded-md p-2 mb-4
+              focus:border-OxBlue
+              focus:bg-neutral-100
+              placeholder:italic placeholder:text-sm
+              text-black"
                 type="text"
                 name="pName"
                 id="pName"
@@ -83,6 +98,11 @@ class ProfileEdit extends Component {
             <label htmlFor="pEmail">
               Email
               <input
+                className="w-full sm:w-96 block border-2 border-OxBlue rounded-md p-2 mb-4
+              focus:border-OxBlue
+              focus:bg-neutral-100
+              placeholder:italic placeholder:text-sm
+              text-black"
                 type="text"
                 name="pEmail"
                 id="pEmail"
@@ -95,6 +115,11 @@ class ProfileEdit extends Component {
             <label htmlFor="pDescription">
               Descrição
               <input
+                className="w-full sm:w-96 block border-2 border-OxBlue rounded-md p-2 mb-4
+              focus:border-OxBlue
+              focus:bg-neutral-100
+              placeholder:italic placeholder:text-sm
+              text-black"
                 type="text"
                 name="pDescription"
                 id="pDescription"
@@ -107,6 +132,11 @@ class ProfileEdit extends Component {
             <label htmlFor="pImage">
               Foto
               <input
+                className="w-full sm:w-96 block border-2 border-OxBlue rounded-md p-2 mb-4
+              focus:border-OxBlue
+              focus:bg-neutral-100
+              placeholder:italic placeholder:text-sm
+              text-black"
                 type="text"
                 name="pImage"
                 id="pImage"
@@ -119,6 +149,9 @@ class ProfileEdit extends Component {
             <label htmlFor="button">
               <button
                 type="button"
+                className="bg-blue-600 w-full sm:w-96 p-3
+                border-OxBlue border-2 rounded-lg hover:bg-blue-900
+                text-neutral-50 "
                 data-testid="edit-button-save"
                 disabled={ isDisabled }
                 onClick={ this.handleSubmit }
@@ -128,7 +161,7 @@ class ProfileEdit extends Component {
               </button>
             </label>
           </form>
-        ) }
+        )}
       </div>
     );
   }
