@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../components/Header';
 import searchAlbumsAPIs from '../services/searchAlbumsAPI';
-import ResultList from './ResultList';
+import ResultList from '../components/ResultList';
 
 class Search extends Component {
   constructor() {
@@ -96,13 +96,13 @@ class Search extends Component {
           </p>)}
         { (buttonClicked && searcheds.length > 0) && (
           <>
-            <p className="text-center mt-5 mb-10">
+            <p className="text-center mt-5 sm:mb-10 mb-5">
               Resultado de álbuns de:
               {' '}
               {searchedName}
 
             </p>
-            <ul>
+            <ul className="flex flex-col sm:grid grid-cols-4 min-w-full">
               { searcheds.map((searched) => (<ResultList
                 { ...searched }
                 key={ searched.collectionId }
