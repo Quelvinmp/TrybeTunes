@@ -43,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.9",
     "@trybe/eslint-config-frontend": "^1.7.1",
     "prop-types": "^15.8.1",
     "stylelint": "^14.11.0",

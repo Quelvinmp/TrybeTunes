@@ -74,8 +74,7 @@ class Search extends Component {
           </label>
           <label htmlFor="pesquisar">
             <button
-              className="bg-blue-600 p-3 border-OxBlue border-2
-              rounded-lg hover:bg-blue-900 text-neutral-50"
+              className="btn"
               type="button"
               id="pesquisar"
               data-testid="search-artist-button"

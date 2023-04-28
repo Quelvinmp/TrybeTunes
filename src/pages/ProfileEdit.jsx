@@ -149,9 +149,7 @@ class ProfileEdit extends Component {
             <label htmlFor="button">
               <button
                 type="button"
-                className="bg-blue-600 w-full sm:w-96 p-3
-                border-OxBlue border-2 rounded-lg hover:bg-blue-900
-                text-neutral-50 "
+                className="btn w-full sm:w-96"
                 data-testid="edit-button-save"
                 disabled={ isDisabled }
                 onClick={ this.handleSubmit }

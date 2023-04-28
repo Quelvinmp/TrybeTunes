@@ -78,8 +78,7 @@ class Login extends Component {
               </label>
               <label htmlFor="submit">
                 <button
-                  className="bg-blue-600 p-3 w-full mt-4 border-OxBlue border-2
-                  rounded-lg hover:bg-blue-900 text-neutral-50"
+                  className="w-full mt-4 btn"
                   id="submit"
                   type="button"
                   data-testid="login-submit-button"

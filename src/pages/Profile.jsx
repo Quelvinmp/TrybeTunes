@@ -33,7 +33,7 @@ class Profile extends Component {
           flex-col items-center "
           >
             <img
-              className="max-h-44 rounded-full border-blue-950 border-2 mt-20 mb-4"
+              className="h-44 w-44 rounded-full border-blue-950 border-2 mt-20 mb-4"
               src={ image }
               alt={ name }
               data-testid="profile-image"
@@ -57,8 +57,7 @@ class Profile extends Component {
             </div>
             <Link
               to="/profile/edit"
-              className="mt-4 bg-blue-600 p-3 border-OxBlue border-2
-              rounded-lg hover:bg-blue-900 text-neutral-50"
+              className="mt-4 btn"
             >
               Editar perfil
 
