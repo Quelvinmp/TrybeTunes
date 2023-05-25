@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import AOS from 'aos';
 import { createUser } from '../services/userAPI';
 import Loading from '../components/Loading';
+import 'aos/dist/aos.css';
 
 class Login extends Component {
   constructor() {
@@ -13,6 +15,12 @@ class Login extends Component {
       buttonClicked: false,
       result: '',
     };
+  }
+
+  componentDidMount() {
+    AOS.init({
+      delay: 1000,
+    });
   }
 
   enableButton = (inputLogin) => {
@@ -44,19 +52,18 @@ class Login extends Component {
           <div
             data-testid="page-login"
             className="bg-OxBlue min-h-screen flex
-            items-center justify-center "
+            items-center justify-center"
           >
             <form
-              className="bg-neutral-50 px-10
-              pt-10 sm:pt-14 pb-10  rounded-2xl shadow-lg
-              text-center shadow-neutral-100/30
-            "
+              className="bg-neutral-50 px-10 pt-10 sm:pt-14 pb-10  rounded-2xl shadow-lg text-center shadow-neutral-100/30 disabled:translate-x-10 duration-1000"
+              // data-aos="fade-in"
             >
               <h1
                 className="mb-10 sm:mb-14
                 font-extrabold text-transparent text-4xl
                 sm:text-6xl bg-clip-text bg-gradient-to-tr
                 from-blue-600 to-OxBlue
+                fade-in
               "
               >
                 TrybeTunes
