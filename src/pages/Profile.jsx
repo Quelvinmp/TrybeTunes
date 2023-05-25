@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+
 import Header from '../components/Header';
 import { getUser } from '../services/userAPI';
-import Loading from './Loading';
+import Loading from '../components/Loading';
 
 class Profile extends Component {
   constructor() {
@@ -28,17 +29,41 @@ class Profile extends Component {
       <div data-testid="page-profile">
         <Header />
         { isLoading ? <Loading /> : (
-          <>
-            <h1>{name}</h1>
-            <p>{email}</p>
-            <p>{description}</p>
+          <div
+            className="bg-OxBlue text-neutral-50 min-w-full min-h-screen flex
+          flex-col items-center "
+          >
             <img
+              className="h-44 w-44 rounded-full border-blue-950 border-2 mt-20 mb-4"
               src={ image }
               alt={ name }
               data-testid="profile-image"
             />
-            <Link to="/profile/edit">Editar perfil</Link>
-          </>
+            <div className="py-12 text-center">
+              <h1>
+                Name:
+                {' '}
+                {name}
+              </h1>
+              <p>
+                Email:
+                {' '}
+                {email}
+              </p>
+              <p>
+                Description:
+                {' '}
+                {description}
+              </p>
+            </div>
+            <Link
+              to="/profile/edit"
+              className="mt-4 btn"
+            >
+              Editar perfil
+
+            </Link>
+          </div>
         )}
       </div>
     );

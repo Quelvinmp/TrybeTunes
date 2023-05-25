@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../components/Header';
 import searchAlbumsAPIs from '../services/searchAlbumsAPI';
-import ResultList from './ResultList';
+import ResultList from '../components/ResultList';
 
 class Search extends Component {
   constructor() {
@@ -45,21 +45,36 @@ class Search extends Component {
     const { inputSearch, isDisabled, searcheds,
       buttonClicked, searchedName } = this.state;
     return (
-      <div data-testid="page-search">
+      <div
+        data-testid="page-search"
+        className="bg-OxBlue text-neutral-50 min-w-full min-h-screen flex
+      flex-col"
+      >
         <Header />
-        <form>
+        <form
+          className="flex items-center justify-around mt-5
+          sm:justify-center sm:gap-10 sm:mt-14
+        "
+        >
           <label htmlFor="banda-artista">
             <input
+              className="placeholder:italic border-2 border-OxBlue rounded-md p-2
+              focus:border-OxBlue
+              focus:bg-neutral-100
+              placeholder:italic placeholder:text-sm text-black
+              "
               type="text"
               name="banda-artista"
               id="banda-artista"
               data-testid="search-artist-input"
+              placeholder="Artista / Banda / Música"
               onChange={ this.handleInputChange }
               value={ inputSearch }
             />
           </label>
           <label htmlFor="pesquisar">
             <button
+              className="btn"
               type="button"
               id="pesquisar"
               data-testid="search-artist-button"
@@ -71,16 +86,25 @@ class Search extends Component {
             </button>
           </label>
         </form>
-        { (buttonClicked && searcheds.length === 0) && <p>Nenhum álbum foi encontrado</p>}
+        { (buttonClicked && searcheds.length === 0)
+        && (
+          <p
+            className="m-auto"
+          >
+            Nenhum álbum foi encontrado
+          </p>)}
         { (buttonClicked && searcheds.length > 0) && (
           <>
-            <p>
+            <p className="text-center mt-5 sm:mb-10 mb-5">
               Resultado de álbuns de:
               {' '}
               {searchedName}
 
             </p>
-            <ul>
+            <ul
+              className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3
+              xl:grid-cols-4 min-w-full"
+            >
               { searcheds.map((searched) => (<ResultList
                 { ...searched }
                 key={ searched.collectionId }

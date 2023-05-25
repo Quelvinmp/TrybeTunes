@@ -14,25 +14,16 @@ class MusicCard extends Component {
     };
   }
 
-  // async componentDidUpdate(prevProp, prevState) {
-  //   const { check } = this.state;
-  //   if (prevState.check !== check && check) {
-
-  //   }
-  // }
-
   componentDidMount() {
     if (localStorage.getItem('favorite_songs')) {
       this.setState({
         loading: true,
         favorited: true,
       });
-      // const { favorite } = this.state;
       this.storageVerify();
       this.setState({
         loading: false,
         favorited: false,
-        // check: favorite.some(({ trackId: id }) => id === trackId),
       });
     }
   }
@@ -69,10 +60,13 @@ class MusicCard extends Component {
     const { infos: { trackName, previewUrl, trackId } } = this.props;
     const { loading, favorited, check } = this.state;
     return (
-      <>
-        { (loading && favorited) && <Loading /> }
-        <li>
-          <p>{trackName}</p>
+      (loading && favorited) ? <Loading /> : (
+        <li className="self-center my-3 flex flex-col items-center">
+          <p className="text-center">
+            Music:
+            {' '}
+            {trackName}
+          </p>
           <audio
             data-testid="audio-component"
             src={ previewUrl }
@@ -85,11 +79,13 @@ class MusicCard extends Component {
             .
           </audio>
           <label
+            className="flex gap-2 items-center w-fit"
             htmlFor={ trackId }
             data-testid={ `checkbox-music-${trackId}` }
           >
-            Favorita
+            Favorite
             <input
+              className="w-fit"
               type="checkbox"
               name="favorite"
               id={ trackId }
@@ -98,7 +94,7 @@ class MusicCard extends Component {
             />
           </label>
         </li>
-      </>
+      )
     );
   }
 }
